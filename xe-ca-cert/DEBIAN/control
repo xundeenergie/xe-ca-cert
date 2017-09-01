@@ -1,0 +1,11 @@
+Package: xe-ca-cert
+Version: 0.1.6
+Section: security
+Priority: extra
+Architecture: all
+Maintainer: Jakobus Schürz <jakob@xundeenergie.at>
+Homepage: http://github.com/xundeenergie/xe-ca-cert
+Provides: xe-ca-cert
+Depends: 
+Recommends: 
+Description: Provides CA-certificate for Xunde Energie CA 
