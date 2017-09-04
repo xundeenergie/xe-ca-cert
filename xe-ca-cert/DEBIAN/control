@@ -1,5 +1,5 @@
 Package: xe-ca-cert
-Version: 0.1.10
+Version: 0.1.11
 Section: security
 Priority: extra
 Architecture: all
