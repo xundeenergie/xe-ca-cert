@@ -1,3 +1,4 @@
 #!/bin/sh
 
 update-ca-certificates
+if test -x /usr/sbin/update-ca-certificates; then update-ca-certificates; fi
