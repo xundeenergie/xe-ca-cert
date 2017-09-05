@@ -1,2 +1,3 @@
 local-repo: xe-ca-cert/etc/ssl/certs/xe-ca-chain.cert.pem
+	@echo cp -uv /root/ca/intermediate/certs/ca-chain.cert.pem
 	sudo cp -uv /root/ca/intermediate/certs/ca-chain.cert.pem xe-ca-cert/etc/ssl/certs/xe-ca-chain.cert.pem

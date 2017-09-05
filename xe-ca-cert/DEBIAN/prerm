@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+FIRST_UID=1000
+LAST_UID=29999
+certificateFile="/etc/ssl/certs/xe-ca-chain.cert.pem"
+certificateName="Xunde Energie Intermediate CA"
+
+IFS=$'\n'
+awk -F : '$3 >= fuid && $3 <= luid {print $6}' fuid=$FIRST_UID luid=$LAST_UID /etc/passwd | while read h; do
+    for certDB in $(find -H "${h}"/.mozilla* "${h}"/.thunderbird* "${h}"/.icedove* -name "cert8.db" 2>/dev/null)
+    do
+      certDir="$(dirname ${certDB})";
+      certutil -d "${certDir}" -D -n "${certificateName}"
+      echo
+    done
+    echo
+done
+
