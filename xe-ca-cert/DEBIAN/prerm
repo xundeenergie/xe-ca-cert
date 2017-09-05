@@ -8,11 +8,14 @@ certificateFile="/etc/ssl/certs/xe-ca-chain.cert.pem"
 certificateName="Xunde Energie Intermediate CA"
 
 IFS=$'\n'
-awk -F : '$3 >= fuid && $3 <= luid {print $6}' fuid=$FIRST_UID luid=$LAST_UID /etc/passwd | while read h; do
-    for certDB in $(find -H "${h}"/.mozilla* "${h}"/.thunderbird* "${h}"/.icedove* -name "cert8.db" 2>/dev/null)
+awk -F : 'BEGIN{OFS=" "} $3 >= fuid && $3 <= luid {print $1,$6}' fuid=$FIRST_UID luid=$LAST_UID /etc/passwd | while IFS=" " read -r u h; do
+    echo $u: $h
+    for certDB in $(find -H "${h}"/.mozilla* "${h}"/.thunderbird* "${h}"/.icedove* -name "cert8.db" )
     do
       certDir="$(dirname ${certDB})";
-      certutil -d "${certDir}" -D -n "${certificateName}"
+      echo $certDir $certDB
+      echo runuser -u $u -- certutil -d "${certDir}" -D -n "${certificateName}" 
+      runuser -u $u -- certutil -d "${certDir}" -D -n "${certificateName}" || echo "CA not in DB. It's ok!"
       echo
     done
     echo
