@@ -1,7 +1,10 @@
-/root/ca/intermediate/certs/ca-chain.cert.pem: local-repo
-
+.PHONY: local-repo
 local-repo:
-	@echo cp -uv /root/ca/intermediate/certs/ca-chain.cert.pem
-	sudo cp -uv /root/ca/intermediate/certs/ca-chain.cert.pem xe-ca-cert/etc/ssl/certs/xe-ca-chain.cert.pem
-	sudo chown jakob:jakob xe-ca-cert/etc/ssl/certs/xe-ca-chain.cert.pem
-
+	@echo
+#local-repo: xe-ca-cert/etc/ssl/certs/xe-ca-chain.cert.pem
+#
+#xe-ca-cert/etc/ssl/certs/xe-ca-chain.cert.pem: /root/ca/intermediate/certs/ca-chain.cert.pem
+#	@echo cp -uv /root/ca/intermediate/certs/ca-chain.cert.pem
+#	sudo cp -uv /root/ca/intermediate/certs/ca-chain.cert.pem xe-ca-cert/etc/ssl/certs/xe-ca-chain.cert.pem
+#	sudo chown jakob:jakob xe-ca-cert/etc/ssl/certs/xe-ca-chain.cert.pem
+#
