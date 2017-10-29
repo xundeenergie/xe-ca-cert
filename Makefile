@@ -7,22 +7,25 @@ COMMIT = $(shell date "+xe%Y%m%d_%H%M%S")
 SUBDIRS := $(shell find $(DIR) -type d -print)
 FILTER := $(abspath .git% %.deb .publish-git .builddeb %.swp Makefile)
 FILTERORIG := $(abspath .git% %.deb .publish-git .builddeb %.swp Makefile) $(shell test -e noupdate.files && cat noupdate.files) /DEBIAN%
-FILES := $(filter-out $(FILTER), $(abspath $(shell find . -mindepth 1 -type f -print) ))
-ORIGS := $(filter-out $(FILTERORIG), $(realpath $(subst ./$(DIR),,$(shell sudo find . -mindepth 2 -type f -print))))
+#FILES := $(filter-out $(FILTER), $(abspath $(shell find . -mindepth 1 -type f -print) ))
+#ORIGS := $(filter-out $(FILTERORIG), $(realpath $(subst ./$(DIR),,$(shell sudo find . -mindepth 2 -type f -print))))
+FILES := $(filter-out $(FILTER), $(abspath $(shell find . -mindepth 1 -type f -exec echo {} \;) ))
+ORIGS := $(filter-out $(FILTERORIG), $(realpath $(subst ./$(DIR),,$(shell sudo find . -mindepth 2 -type f -exec echo {] \;))))
 FILESGIT := $(filter-out $(abspath .git%), $(abspath $(shell find . -mindepth 1 -type f -print)))
 
 #all: $(DIR)/DEBIAN/control 
 
 #$(DIR)/DEBIAN/control: $(FILES)
 
+-include Makefile.repo
 
-all: local-repo .builddeb 
+all: .builddeb
 	@#echo FILE $(FILESGIT)
 
 .builddeb: $(FILES)
 	@#echo FILT $(FILTER)
 	@#echo FILE $(FILES)
-	echo `gawk -f ../increment.awk $(DIR)/DEBIAN/control`
+	@echo `gawk -f ../increment.awk $(DIR)/DEBIAN/control`
 	sed -e "s/^Version:.*/`gawk -f ../increment.awk $(DIR)/DEBIAN/control`/" $(DIR)/DEBIAN/control > $(DIR)/DEBIAN/control.tmp
 	mv $(DIR)/DEBIAN/control.tmp $(DIR)/DEBIAN/control
 	fakeroot dpkg-deb --build $(DIR) "$(DIR)_$(VERSION)_$(ARCH).deb"
@@ -53,5 +56,3 @@ buildonlydeb: $(FILES)
 
 pull-git:
 	git pull origin || exit 0
-
--include Makefile.repo
