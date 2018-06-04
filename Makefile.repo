@@ -2,12 +2,12 @@
 local-repo:
 	@echo
 
-local-repo: xe-ca-cert/usr/share/ca-certificates/xundeenergie/Xunde_Energie_Intermediate-CA-Chain.pem
-
-xe-ca-cert/usr/share/ca-certificates/xundeenergie/Xunde_Energie_Intermediate-CA-Chain.pem: 
-	sudo openssl x509 -outform der -in /root/ca/intermediate/certs/ca-chain.cert.pem -out xe-ca-cert/usr/share/ca-certificates/xundeenergie/Xunde_Energie_Intermediate-CA-Chain.pem
-#	@echo cp -uv /root/ca/intermediate/certs/ca-chain.cert.pem
-#	sudo cp -uv /root/ca/intermediate/certs/ca-chain.cert.pem xe-ca-cert/etc/ssl/certs/xe-ca-chain.cert.pem
-	sudo chown jakob:jakob xe-ca-cert/usr/share/ca-certificates/xundeenergie/Xunde_Energie_Intermediate-CA-Chain.pem
+#local-repo: xe-ca-cert/usr/share/ca-certificates/xundeenergie/Xunde_Energie_Intermediate-CA-Chain.pem
+#
+#xe-ca-cert/usr/share/ca-certificates/xundeenergie/Xunde_Energie_Intermediate-CA-Chain.pem: 
+#	sudo openssl x509 -outform der -in /root/ca/intermediate/certs/ca-chain.cert.pem -out xe-ca-cert/usr/share/ca-certificates/xundeenergie/Xunde_Energie_Intermediate-CA-Chain.pem
+##	@echo cp -uv /root/ca/intermediate/certs/ca-chain.cert.pem
+##	sudo cp -uv /root/ca/intermediate/certs/ca-chain.cert.pem xe-ca-cert/etc/ssl/certs/xe-ca-chain.cert.pem
+#	sudo chown jakob:jakob xe-ca-cert/usr/share/ca-certificates/xundeenergie/Xunde_Energie_Intermediate-CA-Chain.pem
 
 #
